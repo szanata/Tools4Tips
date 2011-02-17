@@ -1,4 +1,4 @@
-/** 
+﻿/** 
 * _______                          _______
 *    |                                |
 *    |  ____  ____       ____   /  |  | ___  ____  ____
@@ -30,7 +30,7 @@
 *
 * @license MIT <http://iceon.me/mit.txt>
 * @license GPL <http://iceon.me/gpl.txt>
-* @author St�fano Stypulkowski <iceon.me>
+* @author Stéfano Stypulkowski <iceon.me>
 * @require jquery 1.4+
 * @compatible FF 2.0+
 * @compatible Google Chrome
