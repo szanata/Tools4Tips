@@ -1,0 +1,40 @@
+﻿_______                          _______
+  |                                |
+  |  ____  ____       ____   /  |  | ___  ____  ____
+  | |    ||    ||    |      /   |  |  |  |    ||
+  | |    ||    ||    |____ /____|_ |  |  |    ||____
+  | |____||____||____ ____|     |  | _|_ |____| ____|
+                                |        | ROCK DA TIPS
+                                         |
+
+Dynamic tooltips creator.
+
+to go:
+
+ Import this script after import jquery, this is important.
+
+ Create in your style a styling set for the #tooltip id:
+ Note that it's a div!!
+ div#tooltip{
+   ... bla bla bla       
+ }
+
+ Put your tooltip text inside a custom attribute called "data-tooltip" 
+ (HTML5 W3C compliant) or the title attribute (to prevent default tooltip) 
+ in any element you want.
+
+ You don't need to go any further, it's now ready and working.
+ Don't worry about AJAX or DHTML, 'cause even when new DOMElements are created,
+ the tooltips are applied!
+
+@license MIT <http://iceon.me/mit.txt>
+@license GPL <http://iceon.me/gpl.txt>
+@author Stéfano Stypulkowski <iceon.me>
+@require jquery 1.4+
+@compatible FF 2.0+
+@compatible Google Chrome
+@compatible IE 6+
+@compatible Opera 10+
+@compatible Safari 5+
+
+probably works on other browsers or versions, but I don't care.
