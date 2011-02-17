@@ -28,9 +28,9 @@
 *   Don't worry about AJAX or DHTML, 'cause even when new DOMElements are created,
 *   the tooltips are applied!
 *
-* @license MIT <http://www.icewares.com.br/license/mit.txt>
-* @license GPL <http://www.icewares.com.br/license/gpl.txt>
-* @author Stéfano Stypulkowski <www.icewares.com.br>
+* @license MIT <http://iceon.me/mit.txt>
+* @license GPL <http://iceon.me/gpl.txt>
+* @author Stéfano Stypulkowski <iceon.me>
 * @require jquery 1.4+
 * @compatible FF 2.0+
 * @compatible Google Chrome
