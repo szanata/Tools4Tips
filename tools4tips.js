@@ -42,7 +42,7 @@
 * @license MIT <http://iceon.me/mit.txt>
 * @license GPL <http://iceon.me/gpl.txt>
 * @author Stéfano Stypulkowski <iceon.me>
-* @version 1.1
+* @version 1.1.1
 * @require jquery 1.4+
 * @compatible FF 2.0+
 * @compatible Google Chrome
@@ -142,7 +142,7 @@
           calculatePosition(e);
           e.stopPropagation();
         }
-      },
+      }
     });
   }
 })(jQuery);
