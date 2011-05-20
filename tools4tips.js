@@ -42,7 +42,7 @@
 * @license MIT <http://iceon.me/mit.txt>
 * @license GPL <http://iceon.me/gpl.txt>
 * @author Stéfano Stypulkowski <iceon.me>
-* @version 1.1.1
+* @version 1.2
 * @require jquery 1.4+
 * @compatible FF 2.0+
 * @compatible Google Chrome
@@ -81,7 +81,7 @@
       return (x >= offset.left && x <= offset.right && y >= offset.top && y <= offset.bottom);
     },
     currentElement = null,
-    calculatePosition = function (e){
+    calculatePosition = function calculatePosition(e){
       domTip.css('left', 
         (e.pageX + POINTER_DIST + domTip.outerWidth(true)) >= Math.max($('body').outerWidth(true),$(document).width()) ?
         Math.max($('body').outerWidth(true),$(document).width()) - domTip.outerWidth(true) :
@@ -103,7 +103,8 @@
             overflow:'visible',
             whiteSpace:'no-wrap',
             top:'0px',
-            left:'0px'
+            left:'0px',
+            maxWidth:'600px'
           });
           offset = {
             top: $(this).offset().top,
@@ -127,8 +128,6 @@
           if ($(this).attr('data-tooltip')){
             if (domTip.html() !== $(this).attr('data-tooltip')){
               domTip.html($(this).attr('data-tooltip'));
-              domTip.css('width','auto');
-              domTip.css('width',domTip.width());
             }
           }else{
             var t = $(this).attr('title');
