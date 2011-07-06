@@ -1,14 +1,19 @@
 ﻿Tools4Tips
 ==========
                                           
->Dynamic tooltips creator.
+>It's a dynamic tooltip text generator.
+>
 >**licenses:**
 >MIT <http://iceon.me/mit.txt>
 >GPL <http://iceon.me/gpl.txt>
->**author:** Stéfano Stypulkowski <http://iceon.me>
+>
+>**author:** Stéfano Stypulkowski <http://iceon.me>,
+>
 >**version:** 1.4
+>
 >**require:** jquery 1.4+
->**compatibility:** 
+>
+>**compatibility:**
 >FF 2.0+
 >Google Chrome 2+
 >IE 6+
