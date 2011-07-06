@@ -1,7 +1,7 @@
-﻿Tools4Tips
+﻿#Tools4Tips
 ==========
                                            
-#Dynamic tooltips creator.
+Dynamic tooltips creator.
 
 **licenses:**
 
@@ -36,7 +36,7 @@ To go:
 Note that it's a div!!
 
     div#tooltip{
-    ... bla bla bla
+      ... bla bla bla
     }
 
 3 - Put your tooltip text inside a custom attribute called "data-tooltip" 
@@ -45,7 +45,7 @@ Note that it's a div!!
 4 - Than initialize this script inside jquery ready function:
 
     $(function (){
-        $('').tools4tips();     
+      $('').tools4tips();     
     });
 
 5 - OK! You don't need to go any further, it's now ready and working.
