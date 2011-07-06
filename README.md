@@ -1,19 +1,7 @@
-﻿______________________________________________________________
- _______                          _______
-    |                                |
-    |  ____  ____       ____   /  |  | ___  ____  ____
-    | |    ||    ||    |      /   |  |  |  |    ||
-    | |    ||    ||    |____ /____|_ |  |  |    ||____
-    | |____||____||____ ____|     |  | _|_ |____| ____|
-                                  |        | ROCK DA TIPS
-                                           |
-                                           |
-______________________________________________________________
-
-Tools4Tips
+﻿Tools4Tips
 ==========
                                            
-Dynamic tooltips creator.
+#Dynamic tooltips creator.
 
 **licenses:**
 
@@ -39,8 +27,6 @@ Opera 10+
 
 Safari 5+
 
-It's jQuery plugin.
-
 To go:
 ------
 
@@ -49,18 +35,18 @@ To go:
 2 - Create in your style a styling set for the #tooltip id:
 Note that it's a div!!
 
->div#tooltip{
->... bla bla bla
->}
+    div#tooltip{
+    ... bla bla bla
+    }
 
 3 - Put your tooltip text inside a custom attribute called "data-tooltip" 
 (HTML5 W3C compliant) or in the title attribute in any DOM elements you want.
    
 4 - Than initialize this script inside jquery ready function:
 
->$(function (){
->  $('').tools4tips();     
->});
+    $(function (){
+        $('').tools4tips();     
+    });
 
 5 - OK! You don't need to go any further, it's now ready and working.
 Any element that have the 'data-tooltip' attribute or the 'title' attrbute 
