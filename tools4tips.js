@@ -10,7 +10,9 @@
 *
 * Dynamic tooltips creator.
 * 
-* Now a jquery plugin.
+* version 1.4
+*
+* It's jQuery plugin.
 *
 * To go:
 *
@@ -24,25 +26,26 @@
 *   }
 *
 *   3 - Put your tooltip text inside a custom attribute called "data-tooltip" 
-*   (HTML5 W3C compliant) or in the title attribute (to prevent default tooltip) 
-*   in any DOM elements you want.
-*
+*   (HTML5 W3C compliant) or in the title attribute in any DOM elements you want.
+*   
 *   4 - Than initialize this script inside jquery ready function:
 *
 *   $(function (){
 *
-*     $('*[title],*[data-tooltip]').tools4tips();     
+*     $('*').tools4tips();     
 *
 *   });
 *
-*   You don't need to go any further, it's now ready and working.
+*   5 - OK! You don't need to go any further, it's now ready and working.
+*   Any element that have the 'data-tooltip' attribute or the 'title' attrbute will have tooltip text.
+*   For this elements the browser's default tooltip text will be disabled.
 *   Don't worry about AJAX or DHTML, 'cause even when new DOMElements are created,
 *   the tooltips are applied!
 *
 * @license MIT <http://iceon.me/mit.txt>
 * @license GPL <http://iceon.me/gpl.txt>
-* @author Stéfano Stypulkowski <iceon.me>
-* @version 1.2
+* @author Stéfano Stypulkowski <http://iceon.me>
+* @version 1.4
 * @require jquery 1.4+
 * @compatible FF 2.0+
 * @compatible Google Chrome
@@ -51,69 +54,91 @@
 * @compatible Safari 5+
 * 
 * probably works on other browsers or versions, but I don't care.
+*
 */
 (function($){
-  if (!$){
-    if (console && typeof console.log === 'function'){
-      console.log('You don\'t have a valid version of jquery')
-    }
-    return false;
-  }
-  var jqvalid = false;
-  try{
-    var vp = jQuery.fn.jquery.split('.');
-    if (Number(vp[0]) >= 1 && Number(vp[1]) >= 4){
-      jqvalid = true;
-    }
-  }catch (e){}
-  if (!jqvalid){
-    if (console && typeof console.log === 'function'){
-      console.log('You don\'t have a valid version of jquery')
-    }
-    return false;
-  }
 
   var
-    domTip = $('<div id="tooltip"></div>'),
-    POINTER_DIST = 15,
-    offset = {},
-    isCoordsInOffset = function (x,y){
-      return (x >= offset.left && x <= offset.right && y >= offset.top && y <= offset.bottom);
-    },
+    domTip = $('<div id="tooltip"></div>').css({
+      position:'absolute',
+      zIndex:999999,
+      overflow:'visible',
+      whiteSpace:'no-wrap',
+      top:'0px',
+      left:'0px',
+      maxWidth:'600px'
+    }),
     currentElement = null,
-    calculatePosition = function calculatePosition(e){
-      domTip.css('left', 
-        (e.pageX + POINTER_DIST + domTip.outerWidth(true)) >= Math.max($('body').outerWidth(true),$(document).width()) ?
-        Math.max($('body').outerWidth(true),$(document).width()) - domTip.outerWidth(true) :
-        e.pageX + POINTER_DIST);
-          
-      domTip.css('top', (e.pageY + POINTER_DIST + domTip.outerHeight(true)) >= Math.max($('body').outerHeight(true),$(document).height()) ?
-        Math.max($('body').outerHeight(true),$(document).height()) - domTip.outerHeight(true) :
-        e.pageY + POINTER_DIST);
-    }
+    POINTER_DIST = 15,
+    offset = {
+      left:0,
+      right:0,
+      top:0,
+      bottom:0,
+      setOffset: function setOffset(el){
+        this.top = el.offset().top;
+        this.bottom = el.offset().top + el.outerHeight();
+        this.left = el.offset().left;
+        this.right = el.offset().left + el.outerWidth();
+      },
+      isCoordsInOffset: function isCoordsInOffset(x, y){
+        return (x >= this.left && x <= this.right && y >= this.top && y <= this.bottom);
+      }
+    };
+    
+  function calculatePosition(e){
+    domTip.css('left', 
+      (e.pageX + POINTER_DIST + domTip.outerWidth(true)) >= Math.max($('body').outerWidth(true),$(document).width()) ?
+      Math.max($('body').outerWidth(true),$(document).width()) - domTip.outerWidth(true) :
+      e.pageX + POINTER_DIST);
+        
+    domTip.css('top', (e.pageY + POINTER_DIST + domTip.outerHeight(true)) >= Math.max($('body').outerHeight(true),$(document).height()) ?
+      Math.max($('body').outerHeight(true),$(document).height()) - domTip.outerHeight(true) :
+      e.pageY + POINTER_DIST);
+  }
+  
+  function makeTip(){
+    domTip.appendTo('body').css({
+      top:'0px',
+      left:'0px',
+    });
+  }
+  
+  function restoreTitle(){
+    $('[data-title-backup]').each(function (){
+      $(this).attr('title',$(this).attr('data-title-backup'));
+      $(this).removeAttr('data-title-backup');
+    });
+  }
+  
+  function backupTitle(el){
+    el.attr('data-title-backup',el.attr('title'));
+    el.removeAttr('title');
+  }
     
   $.fn.tools4tips = function (){
+  
+    $(this).each(function (){
+      if ($(this).attr('title') && !$(this).attr('data-tooltip')){
+        $(this).attr('data-tooltip',$(this).attr('title'));
+      }
+    });
     
     $(this).live({
-      mouseover: function(e){
+      mouseover: function (e){
+        if (!$(this).attr('data-tooltip')){
+          domTip.detach();
+          return;
+        }
+        
         if (!domTip.parent().size()){
-          domTip.appendTo('body').css({
-            position:'absolute',
-            zIndex:999999,
-            overflow:'visible',
-            whiteSpace:'no-wrap',
-            top:'0px',
-            left:'0px',
-            maxWidth:'600px'
-          });
-          offset = {
-            top: $(this).offset().top,
-            bottom: $(this).offset().top + $(this).outerHeight(),
-            left: $(this).offset().left,
-            right: $(this).offset().left + $(this).outerWidth()
-          }
+        
+          makeTip();
+          
+          offset.setOffset($(this))
+          
           $(document).bind('mousemove',function (e){
-            if (!isCoordsInOffset(e.pageX,e.pageY)){
+            if (!offset.isCoordsInOffset(e.pageX,e.pageY)){
               currentElement = null;
               domTip.detach();
               $(document).unbind('mousemove');
@@ -124,24 +149,25 @@
         }
       },
       mouseenter: function (e){
+      
         if (this !== currentElement){
-          if ($(this).attr('data-tooltip')){
-            if (domTip.html() !== $(this).attr('data-tooltip')){
-              domTip.html($(this).attr('data-tooltip'));
-            }
-          }else{
-            var t = $(this).attr('title');
-            $(this).attr('data-tooltip',t);
-            $(this).removeAttr('title');
-            if (domTip.html() !== t){
-              domTip.html(t);
-            }
+      
+          restoreTitle();
+          
+          backupTitle($(this));
+          
+          if (domTip.html() !== $(this).attr('data-tooltip')){
+            domTip.html($(this).attr('data-tooltip'));
           }
+          
           currentElement = this;
+          
           calculatePosition(e);
+          
           e.stopPropagation();
         }
       }
     });
+    return this;
   }
 })(jQuery);
