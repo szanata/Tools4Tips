@@ -10,7 +10,7 @@
 *
 * Dynamic tooltips creator.
 * 
-* version 1.4
+* version 1.4.1
 *
 * It's jQuery plugin.
 *
@@ -45,7 +45,7 @@
 * @license MIT <http://iceon.me/mit.txt>
 * @license GPL <http://iceon.me/gpl.txt>
 * @author Stéfano Stypulkowski <http://iceon.me>
-* @version 1.4
+* @version 1.4.1
 * @require jquery 1.4+
 * @compatible FF 2.0+
 * @compatible Google Chrome
@@ -62,11 +62,10 @@
     domTip = $('<div id="tooltip"></div>').css({
       position:'absolute',
       zIndex:999999,
-      overflow:'visible',
       whiteSpace:'no-wrap',
       top:'0px',
       left:'0px',
-      maxWidth:'600px'
+      overflow:'hidden'
     }),
     currentElement = null,
     POINTER_DIST = 15,
@@ -158,6 +157,11 @@
           
           if (domTip.html() !== $(this).attr('data-tooltip')){
             domTip.html($(this).attr('data-tooltip'));
+          }
+          
+          domTip.attr('style',domTip.attr('style').replace('width: 300px;',''));
+          if (domTip.outerWidth(true) > 300){
+            domTip.attr('style',domTip.attr('style') + 'width: 300px;');
           }
           
           currentElement = this;
