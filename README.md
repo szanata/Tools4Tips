@@ -1,31 +1,19 @@
 ﻿Tools4Tips
 ==========
-                                           
-Dynamic tooltips creator.
-
-**licenses:**
-
-MIT <http://iceon.me/mit.txt>
-
-GPL <http://iceon.me/gpl.txt>
-
-**author:** Stéfano Stypulkowski <http://iceon.me>
-
-**version:** 1.4
-
-**require:** jquery 1.4+
-
-**compatibility:** 
-
-FF 2.0+
-
-Google Chrome 2+
-
-IE 6+
-
-Opera 10+
-
-Safari 5+
+                                          
+>Dynamic tooltips creator.
+>**licenses:**
+>MIT <http://iceon.me/mit.txt>
+>GPL <http://iceon.me/gpl.txt>
+>**author:** Stéfano Stypulkowski <http://iceon.me>
+>**version:** 1.4
+>**require:** jquery 1.4+
+>**compatibility:** 
+>FF 2.0+
+>Google Chrome 2+
+>IE 6+
+>Opera 10+
+>Safari 5+
 
 To go:
 ------
