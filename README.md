@@ -1,4 +1,4 @@
-﻿#Tools4Tips
+﻿Tools4Tips
 ==========
                                            
 Dynamic tooltips creator.
