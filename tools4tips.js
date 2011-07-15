@@ -10,7 +10,7 @@
 *
 * Dynamic tooltips creator.
 * 
-* version 1.4.1
+* version 1.4.2
 *
 * It's jQuery plugin.
 *
@@ -99,35 +99,40 @@
   function makeTip(){
     domTip.appendTo('body').css({
       top:'0px',
-      left:'0px',
+      left:'0px'
     });
   }
   
   function restoreTitle(){
     $('[data-title-backup]').each(function (){
-      $(this).attr('title',$(this).attr('data-title-backup'));
-      $(this).removeAttr('data-title-backup');
+      if ($(this).attr('data-title-backup')){
+        $(this).attr('title',$(this).attr('data-title-backup'));
+        $(this).removeAttr('data-title-backup');
+      }
     });
   }
   
   function backupTitle(el){
-    el.attr('data-title-backup',el.attr('title'));
-    el.removeAttr('title');
+    if (el.attr('title')){
+      el.attr({
+        'data-title-backup': el.attr('title'),
+        'title': ''
+      });
+    }
   }
     
   $.fn.tools4tips = function (){
-  
-    $(this).each(function (){
-      if ($(this).attr('title') && !$(this).attr('data-tooltip')){
-        $(this).attr('data-tooltip',$(this).attr('title'));
-      }
-    });
     
     $(this).live({
+    
       mouseover: function (e){
-        if (!$(this).attr('data-tooltip')){
+        if (!$(this).attr('data-tooltip') && !$(this).attr('title')){
           domTip.detach();
           return;
+        }else{
+          if (!$(this).attr('data-tooltip')){
+            $(this).attr('data-tooltip',$(this).attr('title'));
+          }
         }
         
         if (!domTip.parent().size()){
