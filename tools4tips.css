@@ -5,10 +5,10 @@
   color:#AAA;
   background:#000;
   opacity:.65;
-	filter:alpha(opacity=65);
-	-ms-filter:"alpha(opacity=65)";
-	-khtml-opacity:.65;
-	-moz-opacity:.65;
+  filter:alpha(opacity=65);
+  -ms-filter:"alpha(opacity=65)";
+  -khtml-opacity:.65;
+  -moz-opacity:.65;
   border:1px solid #AAA;
   border-radius:4px;
   -moz-border-radius:4px;

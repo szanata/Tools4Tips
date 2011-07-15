@@ -1,40 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset=utf-8 />
+	<head>
+		<title>Tools4Tips</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
-        <title>Smartka</title>
-        
-        <script src="jquery-1.4.4.min.js"></script>
-        
-        <script src="tools4tips.js"></script>
-        
-        <link type="text/css" rel="stylesheet" href="tools4tips.css"/>
-        
-    </head>
+    <title>Tools$Tips</title>
+      
+    <link type="text/css" rel="stylesheet" href="tools4tips.css"/>
     
-    <body style="text-align:right;margin:0px;">
+    <script src="jquery-1.6.1.min.js"></script>
+      
+    <script src="tools4tips.js"></script>
+  </head>
+  <body style="text-align:right;margin:0px;">
     
-        <input data-tooltip="Your name"/>
-        
-        <input data-tooltip="Your age"/>
-        
-        <select data-tooltip="Select your destiny">
-          <option value="0">Stay at home...</option>
-          <option value="1">Be rich</option>
-          <option value="33">Be much more than rich</option>
-          <option value="888">Be like Chuck Norris</option>
-        </select>
-        
-        <div style="padding:30px;width:600px;background:#aaa;" data-tooltip="You're inside a div..... this div is so beautiful">
-          <img style="width:500px;height:300pxborder:0px;" title="mitsubishi eclipse" src="http://2.bp.blogspot.com/_YOp3b9kMitI/S8d8RtnODRI/AAAAAAAAAzY/tXQy_UFIdSI/s1600/Mitsubishi+Eclipse+GT+(2009).jpg"/>
-          <br/>
-          <button data-tooltip="Save... must be sure">Save</button>
-          <button title="">Cancel</button>
-          <button data-tooltip="Let's try again">Undo</button>
-        </div>
-        <script>
-          $('*').tools4tips();
-        </script>
-    </body>
+    <input data-tooltip="Your name"/>
+    
+    <input title="Your age"/>
+    
+    <select data-tooltip="Select your destiny">
+      <option value="0">Stay at home...</option>
+      <option value="1">Be rich</option>
+      <option value="33">Be much more than rich</option>
+      <option value="888">Be like Chuck Norris</option>
+    </select>
+    
+    <div style="padding:30px;width:600px;background:#aaa;" data-tooltip="You're inside a div..... this div is so beautiful">
+      <img style="width:500px;height:300pxborder:0px;" title="mitsubishi eclipse" src="http://2.bp.blogspot.com/_YOp3b9kMitI/S8d8RtnODRI/AAAAAAAAAzY/tXQy_UFIdSI/s1600/Mitsubishi+Eclipse+GT+(2009).jpg"/>
+      <br/>
+      <button data-tooltip="Save... must be sure">Save</button>
+      <button title="">Cancel</button>
+      <button data-tooltip="Let's try again">Undo</button>
+    </div>
+    
+    <script>
+      $(function (){
+        $('*[data-tooltip], *[title]:not([title=""])').tools4tips();
+      });
+    </script>
+    
+  </body>  
 </html>
