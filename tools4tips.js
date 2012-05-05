@@ -10,7 +10,7 @@
 *
 * Dynamic tooltips creator.
 * 
-* version 1.4.2
+* version 1.5
 *
 * It's jQuery plugin.
 *
@@ -126,34 +126,33 @@
     $(this).live({
     
       mouseover: function (e){
+      
+        domTip.detach();
+      
         if (!$(this).attr('data-tooltip') && !$(this).attr('title')){
-          domTip.detach();
           return;
         }else{
           if (!$(this).attr('data-tooltip')){
             $(this).attr('data-tooltip',$(this).attr('title'));
           }
         }
+                
+        makeTip();
         
-        if (!domTip.parent().size()){
+        offset.setOffset($(this))
         
-          makeTip();
-          
-          offset.setOffset($(this))
-          
-          $(document).bind('mousemove',function (e){
-            if (!offset.isCoordsInOffset(e.pageX,e.pageY)){
-              currentElement = null;
-              domTip.detach();
-              $(document).unbind('mousemove');
-            }else{
-              calculatePosition(e);
-            }
-          });
-        }
+        $(document).bind('mousemove',function (e){
+          if (!offset.isCoordsInOffset(e.pageX,e.pageY)){
+            currentElement = null;
+            domTip.detach();
+            $(document).unbind('mousemove');
+          }else{
+            calculatePosition(e);
+          }
+        });
       },
       mouseenter: function (e){
-      
+        
         if (this !== currentElement){
       
           restoreTitle();
