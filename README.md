@@ -4,12 +4,12 @@
 >It's a dynamic tooltip text generator.
 >
 >**licenses:**
->MIT <http://iceon.me/mit.txt>
->GPL <http://iceon.me/gpl.txt>
+>MIT <http://szanata.com/mit.txt>
+>GPL <http://szanata.com/gpl.txt>
 >
 >**author:** Stéfano Stypulkowski <http://iceon.me>,
 >
->**version:** 1.4
+>**version:** 1.5
 >
 >**require:** jquery 1.4+
 >
