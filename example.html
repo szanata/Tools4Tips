@@ -1,43 +1,36 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Tools4Tips</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-    <title>Tools$Tips</title>
-      
+    <title>Tools4Tips</title>
+    
+    <link type="text/css" rel="stylesheet" href="example.css"/>    
     <link type="text/css" rel="stylesheet" href="tools4tips.css"/>
     
-    <script src="jquery-1.6.1.min.js"></script>
-      
+    <script src="jquery-1.8.1.min.js"></script>
     <script src="tools4tips.js"></script>
+    
   </head>
-  <body style="text-align:right;margin:0px;">
-    
-    <input data-tooltip="Your name"/>
-    
-    <input title="Your age"/>
-    
-    <select data-tooltip="Select your destiny">
-      <option value="0">Stay at home...</option>
-      <option value="1">Be rich</option>
-      <option value="33">Be much more than rich</option>
-      <option value="888">Be like Chuck Norris</option>
-    </select>
-    
-    <div style="padding:30px;width:600px;background:#aaa;" data-tooltip="You're inside a div..... this div is so beautiful">
-      <img style="width:500px;height:300pxborder:0px;" title="mitsubishi eclipse" src="http://2.bp.blogspot.com/_YOp3b9kMitI/S8d8RtnODRI/AAAAAAAAAzY/tXQy_UFIdSI/s1600/Mitsubishi+Eclipse+GT+(2009).jpg"/>
-      <br/>
-      <button data-tooltip="Save... must be sure">Save</button>
-      <button title="">Cancel</button>
-      <button data-tooltip="Let's try again">Undo</button>
+  <body>
+
+    <div id="box" data-tooltip="This is a box">
+      <button type="button" title="Click here to add more content">Add more content</button>
+      <div id="content-box" title="Here more content will appear">
+      </div>
     </div>
     
     <script>
       $(function (){
+        //tooltip
         $('*[data-tooltip], *[title]:not([title=""])').tools4tips();
+        
+        $('button').on('click', function (){
+          $('#content-box').append(
+            $('<div></div>').attr('title','Content: ' + (1 + $('#content-box > div').size())).html('some item')
+          )
+        });
       });
+      
     </script>
-    
   </body>  
 </html>
