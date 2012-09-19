@@ -1,0 +1,36 @@
+﻿body{
+  margin:0px;
+  font-family:arial;
+  text-align:center;
+}
+
+#box{
+  margin:0px auto;
+  width:700px;
+  height:500px;
+  background-color:#ccc;
+  box-shadow:0px 0px 4px #000;
+}
+button{
+  background-color:#fff;
+  border:1px solid #222;
+  padding:10px;
+  border-radius:4px;
+  margin:10px;
+  color:#222;
+  box-shadow:0px 0px 3px rgba(0,0,0,.3),inset 0px -2px 5px rgba(0,0,0,0.2);
+}
+#content-box{
+  width:90%;
+  margin:0px auto;
+  border:1px solid #222;
+  height:400px;
+  box-shadow:inset 0px 0px 5px rgba(0,0,0,.5);
+  background-color:#aaa;
+}
+#content-box > div{
+  padding:10px;
+  margin:5px;
+  background-color:#fff;
+  box-shadow:0px 0px 4px #000;
+}

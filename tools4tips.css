@@ -1,17 +1,11 @@
-#tooltip{
+﻿#tooltip{
   font-family:arial;
-  font-size:18px;
-  padding:6px;
-  color:#AAA;
-  background:#000;
-  opacity:.65;
-  filter:alpha(opacity=65);
-  -ms-filter:"alpha(opacity=65)";
-  -khtml-opacity:.65;
-  -moz-opacity:.65;
-  border:1px solid #AAA;
-  border-radius:4px;
-  -moz-border-radius:4px;
-  -webkit-border-radius:4px;
+  font-size:13px;
+  font-weight:bolder;
+  padding:10px;
+  color:#fff;
+  background:#222;
   text-align:left;
+  max-width:200px;
+  box-shadow:2px 2px 4px #000;
 }

@@ -7,11 +7,11 @@
 >MIT <http://szanata.com/mit.txt>
 >GPL <http://szanata.com/gpl.txt>
 >
->**author:** Stéfano Stypulkowski <http://iceon.me>,
+>**author:** Stéfano Stypulkowski <http://sanata.me>,
 >
->**version:** 1.5
+>**version:** 2
 >
->**require:** jquery 1.4+
+>**require:** jquery 1.7+
 >
 >**compatibility:**
 >FF 2.0+
@@ -32,8 +32,11 @@ Note that it's a div!!
       ... bla bla bla
     }
 
+Use 'max-width' to set the maximum width for the tip.
+The is a 'tools4tips.css' example among the project.
+
 3 - Put your tooltip text inside a custom attribute called "data-tooltip" 
-(HTML5 W3C compliant) or in the title attribute in any DOM elements you want.
+(HTML5 W3C compliant) or in the "title" attribute on any DOM elements you want.
    
 4 - Than initialize this script inside jquery ready function:
 

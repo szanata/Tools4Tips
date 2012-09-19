@@ -10,8 +10,6 @@
 *
 * Dynamic tooltips creator.
 * 
-* version 1.5
-*
 * It's jQuery plugin.
 *
 * To go:
@@ -42,13 +40,13 @@
 *   Don't worry about AJAX or DHTML, 'cause even when new DOMElements are created,
 *   the tooltips are applied!
 *
-* @license MIT <http://iceon.me/mit.txt>
-* @license GPL <http://iceon.me/gpl.txt>
-* @author Stéfano Stypulkowski <http://iceon.me>
-* @version 1.4.1
-* @require jquery 1.4+
-* @compatible FF 2.0+
-* @compatible Google Chrome
+* @license MIT <http://szanata.com/mit.txt>
+* @license GPL <http://szanata.com/gpl.txt>
+* @author Stéfano Stypulkowski <http://szanata.me>
+* @version 2.0
+* @require jquery 1.7+
+* @compatible FF 3.5+
+* @compatible Google Chrome 3+
 * @compatible IE 6+
 * @compatible Opera 10+
 * @compatible Safari 5+
@@ -59,7 +57,7 @@
 (function($){
 
   var
-    domTip = $('<div id="tooltip"></div>').css({
+    $tip = $('<div id="tooltip"></div>').css({
       position:'absolute',
       zIndex:999999,
       whiteSpace:'no-wrap',
@@ -67,115 +65,52 @@
       left:'0px',
       overflow:'hidden'
     }),
-    currentElement = null,
-    POINTER_DIST = 15,
-    offset = {
-      left:0,
-      right:0,
-      top:0,
-      bottom:0,
-      setOffset: function setOffset(el){
-        this.top = el.offset().top;
-        this.bottom = el.offset().top + el.outerHeight();
-        this.left = el.offset().left;
-        this.right = el.offset().left + el.outerWidth();
-      },
-      isCoordsInOffset: function isCoordsInOffset(x, y){
-        return (x >= this.left && x <= this.right && y >= this.top && y <= this.bottom);
-      }
-    };
+    MOUSE_DIST = 15;
     
   function calculatePosition(e){
-    domTip.css('left', 
-      (e.pageX + POINTER_DIST + domTip.outerWidth(true)) >= Math.max($('body').outerWidth(true),$(document).width()) ?
-      Math.max($('body').outerWidth(true),$(document).width()) - domTip.outerWidth(true) :
-      e.pageX + POINTER_DIST);
+    $tip.css('left', 
+      (e.pageX + MOUSE_DIST + $tip.outerWidth(true)) >= Math.max($('body').outerWidth(true),$(document).width()) ?
+      Math.max($('body').outerWidth(true),$(document).width()) - $tip.outerWidth(true) :
+      e.pageX + MOUSE_DIST);
         
-    domTip.css('top', (e.pageY + POINTER_DIST + domTip.outerHeight(true)) >= Math.max($('body').outerHeight(true),$(document).height()) ?
-      Math.max($('body').outerHeight(true),$(document).height()) - domTip.outerHeight(true) :
-      e.pageY + POINTER_DIST);
+    $tip.css('top', (e.pageY + MOUSE_DIST + $tip.outerHeight(true)) >= Math.max($('body').outerHeight(true),$(document).height()) ?
+      Math.max($('body').outerHeight(true),$(document).height()) - $tip.outerHeight(true) :
+      e.pageY + MOUSE_DIST);
   }
   
-  function makeTip(){
-    domTip.appendTo('body').css({
-      top:'0px',
-      left:'0px'
-    });
+  function makeTip(content){
+    $tip.appendTo('body').css({
+      top:'0px',left:'0px'
+    }).html(content);
   }
   
-  function restoreTitle(){
+  function restorePrevTitle(){
     $('[data-title-backup]').each(function (){
-      if ($(this).attr('data-title-backup')){
-        $(this).attr('title',$(this).attr('data-title-backup'));
-        $(this).removeAttr('data-title-backup');
-      }
+      $(this).attr('title',$(this).attr('data-title-backup')).removeAttr('data-title-backup');
     });
-  }
-  
-  function backupTitle(el){
-    if (el.attr('title')){
-      el.attr({
-        'data-title-backup': el.attr('title'),
-        'title': ''
-      });
-    }
   }
     
   $.fn.tools4tips = function (){
     
-    $(this).live({
-    
-      mouseover: function (e){
-      
-        domTip.detach();
-      
-        if (!$(this).attr('data-tooltip') && !$(this).attr('title')){
+    $(document).on({
+      'mouseover.tools4tip':function (e){
+        e.stopPropagation();
+        var self = $(e.target);
+        if (!self.is('[data-tooltip],[title],[data-title-backup]')){
+          $tip.detach();
           return;
-        }else{
-          if (!$(this).attr('data-tooltip')){
-            $(this).attr('data-tooltip',$(this).attr('title'));
-          }
+        }else if (self.attr('title')){
+          self.attr('data-title-backup', self.attr('title')).removeAttr('title');
         }
-                
-        makeTip();
-        
-        offset.setOffset($(this))
-        
-        $(document).bind('mousemove',function (e){
-          if (!offset.isCoordsInOffset(e.pageX,e.pageY)){
-            currentElement = null;
-            domTip.detach();
-            $(document).unbind('mousemove');
-          }else{
-            calculatePosition(e);
-          }
-        });
+        makeTip(self.attr('data-tooltip') || self.attr('data-title-backup'));
+        $(document).on('mousemove.tools4tip', calculatePosition).trigger('mousemove');
       },
-      mouseenter: function (e){
-        
-        if (this !== currentElement){
-      
-          restoreTitle();
-          
-          backupTitle($(this));
-          
-          if (domTip.html() !== $(this).attr('data-tooltip')){
-            domTip.html($(this).attr('data-tooltip'));
-          }
-          
-          domTip.attr('style',domTip.attr('style').replace('width: 300px;',''));
-          if (domTip.outerWidth(true) > 300){
-            domTip.attr('style',domTip.attr('style') + 'width: 300px;');
-          }
-          
-          currentElement = this;
-          
-          calculatePosition(e);
-          
-          e.stopPropagation();
-        }
+      'mouseleave.tools4tip': function (e){
+        $(document).off('mousemove.tools4tip');
+        $tip.detach();
+        restorePrevTitle();
       }
-    });
+    },$(this).selector);
     return this;
   }
 })(jQuery);
